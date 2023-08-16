@@ -13,13 +13,12 @@ class Carts extends Component
     public $products;
     public $price;
     public $product;
+    public $totalPrice;
 
     public function cartdata()
     {
         $this->totalPrice = 0;
-
         $this->cart_items = Cart::where('customer_id', Auth::id())->with('product')->get();
-
         $this->products = $this->cart_items;
 
         foreach($this->products as $product)
