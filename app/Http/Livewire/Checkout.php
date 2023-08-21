@@ -60,15 +60,15 @@ class Checkout extends Component
             'mode' => 'payment',
             'success_url' => route('success') . "?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url' => route('cancel'),
-          ]);
-
+        ]);
+ 
           
 
         $payment = new Payment();
         $payment->status = 'paid';
         $payment->total_price = $this->total_price;
         $payment->session_id = $session->id;
-        $payment->payment_detail = serialize(['user_name' => $this->name, 'user_email' => $this->email, 'currency' => $session->currency, 'city' => $this->state, 'state', 'address' => $this->address]);
+        $payment->payment_detail = serialize(['user_name' => $this->name, 'user_email' => $this->email, 'currency' => $session->currency, 'city' => $this->state, 'address' => $this->address]);
         $payment->save();
 
         return redirect()->to($session->url);
